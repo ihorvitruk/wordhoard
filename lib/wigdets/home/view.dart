@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wordhoard/unit/unit_view.dart';
+import 'package:wordhoard/wigdets/dictionary/view.dart';
 import 'package:wordhoard/wigdets/home/unit.dart';
 import 'package:wordhoard/wigdets/translator/view.dart';
-import 'package:wordhoard/wigdets/dictionary/view.dart';
 
 class HomeView extends UnitView<HomeUnit> {
   const HomeView({super.key});
@@ -18,7 +18,7 @@ class HomeView extends UnitView<HomeUnit> {
         currentIndex: unit.state.currentTab,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.translate),
+            icon: Icon(Icons.language),
             label: 'Translator',
           ),
           BottomNavigationBarItem(
