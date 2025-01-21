@@ -5,8 +5,7 @@ final class UnitBuilders extends InheritedWidget {
   const UnitBuilders({required this.map, required super.child, super.key});
 
   @protected
-  final Map<Type, Unit Function(BuildContext context, Object? params)>
-  map;
+  final Map<Type, Unit Function(BuildContext context, Object? params)> map;
 
   static U createUnit<U extends Unit>(BuildContext context, Object? params) {
     final units = context.dependOnInheritedWidgetOfExactType<UnitBuilders>();
