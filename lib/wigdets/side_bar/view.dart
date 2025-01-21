@@ -7,6 +7,16 @@ class SideBarView extends UnitView<SideBarUnit> {
 
   @override
   Widget build(BuildContext context, SideBarUnit unit) {
-    return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.all(16),
+      width: 200,
+      height: MediaQuery.of(context).size.height,
+      alignment: Alignment.topLeft,
+      color: Theme.of(context).colorScheme.surface,
+      child: TextButton(
+        onPressed: unit.onLogoutPressed,
+        child: const Text('Logout'),
+      ),
+    );
   }
 }

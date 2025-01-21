@@ -6,7 +6,6 @@ import 'package:wordhoard/firebase_options.dart';
 import 'package:wordhoard/repositories/auth.dart';
 import 'package:wordhoard/services/services.dart';
 import 'package:wordhoard/unit/units.dart';
-import 'package:wordhoard/wigdets/home/unit.dart';
 import 'package:wordhoard/wigdets/main/unit.dart';
 import 'package:wordhoard/wigdets/main/view.dart';
 
@@ -33,12 +32,11 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       home: UnitBuilders(
-        map: {
-          MainUnit: (_, __) => MainUnit(authRepository),
-          HomeUnit: (_, __) => HomeUnit(),
-        },
-        child: const MainView(
-          firebaseSignInScreen: SignInScreen(
+        map: {MainUnit: (_, __) => MainUnit(authRepository: authRepository)},
+        child: MainView(
+          services: _services,
+          authRepository: authRepository,
+          firebaseSignInScreen: const SignInScreen(
             showAuthActionSwitch: false,
             showPasswordVisibilityToggle: true,
           ),

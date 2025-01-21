@@ -32,7 +32,7 @@ class _UnitViewState<U extends Unit> extends State<UnitView> {
 
   @override
   Future<void> dispose() async {
+    super.dispose(); // Must be first here.
     await unit.close();
-    super.dispose();
   }
 }

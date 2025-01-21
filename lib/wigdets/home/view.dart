@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wordhoard/unit/unit_view.dart';
 import 'package:wordhoard/wigdets/dictionary/view.dart';
 import 'package:wordhoard/wigdets/home/unit.dart';
+import 'package:wordhoard/wigdets/side_bar/view.dart';
 import 'package:wordhoard/wigdets/translator/view.dart';
 
 class HomeView extends UnitView<HomeUnit> {
@@ -10,6 +11,8 @@ class HomeView extends UnitView<HomeUnit> {
   @override
   Widget build(BuildContext context, HomeUnit unit) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Word Hoard')),
+      drawer: const SideBarView(),
       body:
           unit.state.currentTab == 0
               ? const TranslatorView()
@@ -26,6 +29,7 @@ class HomeView extends UnitView<HomeUnit> {
             label: 'Dictionary',
           ),
         ],
+        onTap: unit.onBottomNavigationBarItemTap,
       ),
     );
   }
