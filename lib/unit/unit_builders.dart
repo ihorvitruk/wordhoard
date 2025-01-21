@@ -2,10 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:wordhoard/unit/unit.dart';
 
 final class UnitBuilders extends InheritedWidget {
-  const UnitBuilders({required this.map, required super.child, super.key});
+  UnitBuilders({
+    required void Function(UnitBuilders builders) init,
+    required super.child,
+    super.key,
+  }) {
+    init(this);
+  }
 
   @protected
-  final Map<Type, Unit Function(BuildContext context, Object? params)> map;
+  final _buildersMap =
+      <Type, Unit Function(BuildContext context, Object? params)>{};
+
+  void add<U extends Unit>(
+    U Function(BuildContext context, Object? params) builder,
+  ) {
+    _buildersMap[U] = builder;
+  }
 
   static U createUnit<U extends Unit>(BuildContext context, Object? params) {
     final units = context.dependOnInheritedWidgetOfExactType<UnitBuilders>();
@@ -13,7 +26,7 @@ final class UnitBuilders extends InheritedWidget {
       throw Exception('No UnitBuilders found in the widget tree.');
     }
 
-    final unitBuilder = units.map[U];
+    final unitBuilder = units._buildersMap[U];
     if (unitBuilder == null) {
       throw Exception(
         "No builder found for unit $U. Make sure you've added it to map.",

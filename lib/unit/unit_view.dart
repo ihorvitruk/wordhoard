@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wordhoard/unit/unit.dart';
-import 'package:wordhoard/unit/units.dart';
+import 'package:wordhoard/unit/unit_builders.dart';
 
 abstract class UnitView<U extends Unit> extends StatefulWidget {
   const UnitView({this.params, super.key});

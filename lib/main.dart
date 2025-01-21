@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wordhoard/firebase_options.dart';
 import 'package:wordhoard/repositories/auth.dart';
 import 'package:wordhoard/services/services.dart';
-import 'package:wordhoard/unit/units.dart';
+import 'package:wordhoard/unit/unit_builders.dart';
 import 'package:wordhoard/wigdets/main/unit.dart';
 import 'package:wordhoard/wigdets/main/view.dart';
 
@@ -32,7 +32,9 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       home: UnitBuilders(
-        map: {MainUnit: (_, __) => MainUnit(authRepository: authRepository)},
+        init: (UnitBuilders builders) {
+          builders.add((_, __) => MainUnit(authRepository: authRepository));
+        },
         child: MainView(
           services: _services,
           authRepository: authRepository,

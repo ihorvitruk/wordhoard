@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wordhoard/repositories/auth.dart';
 import 'package:wordhoard/services/services.dart';
+import 'package:wordhoard/unit/unit_builders.dart';
 import 'package:wordhoard/unit/unit_view.dart';
-import 'package:wordhoard/unit/units.dart';
 import 'package:wordhoard/wigdets/dictionary/unit.dart';
 import 'package:wordhoard/wigdets/home/unit.dart';
 import 'package:wordhoard/wigdets/home/view.dart';
@@ -30,11 +30,12 @@ class MainView extends UnitView<MainUnit> {
         ? const Center(child: CircularProgressIndicator())
         : unit.state.isSignedIn!
         ? UnitBuilders(
-          map: {
-            HomeUnit: (_, __) => HomeUnit(),
-            TranslatorUnit: (_, __) => TranslatorUnit(),
-            DictionaryUnit: (_, __) => DictionaryUnit(),
-            SideBarUnit: (_, __) => SideBarUnit(authRepository: authRepository),
+          init: (UnitBuilders builders) {
+            builders
+              ..add((_, __) => HomeUnit())
+              ..add((_, __) => TranslatorUnit())
+              ..add((_, __) => DictionaryUnit())
+              ..add((_, __) => SideBarUnit(authRepository: authRepository));
           },
           child: const HomeView(),
         )
