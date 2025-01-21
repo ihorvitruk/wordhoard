@@ -16,7 +16,7 @@ final class UnitBuilders extends InheritedWidget {
     final unitBuilder = units.map[U];
     if (unitBuilder == null) {
       throw Exception(
-        'No builder found for unit $U. Make sure you\'ve added it to map.',
+        "No builder found for unit $U. Make sure you've added it to map.",
       );
     }
 

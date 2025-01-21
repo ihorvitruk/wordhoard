@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 abstract class Unit<S> {
   Unit(S initialState) {
     _state = initialState;
-    _statesSubscription = states.listen(_updateState);
+    _statesSubscription = states.distinct().listen((state) => _state = state);
   }
 
   late S _state;
@@ -12,15 +12,11 @@ abstract class Unit<S> {
 
   StreamSubscription? _statesSubscription;
 
-  void _updateState(S newState) {
-    _state = newState;
-  }
-
   Stream<S> get states => Stream.value(_state);
 
   @mustCallSuper
   Future<void> close() async {
-    _statesSubscription?.cancel();
+    await _statesSubscription?.cancel();
     _statesSubscription = null;
   }
 }
