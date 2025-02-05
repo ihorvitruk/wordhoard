@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:wordhoard/unit/unit_view.dart';
+import 'package:wordhoard/architecture/base_view.dart';
 import 'package:wordhoard/wigdets/dictionary/view.dart';
-import 'package:wordhoard/wigdets/home/unit.dart';
+import 'package:wordhoard/wigdets/home/cubit.dart';
 import 'package:wordhoard/wigdets/side_bar/view.dart';
 import 'package:wordhoard/wigdets/translator/view.dart';
 
-class HomeView extends UnitView<HomeUnit> {
+class HomeView extends BaseView<HomeCubit> {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context, HomeUnit unit) {
+  Widget buildView(BuildContext context, HomeCubit cubit) {
     return Scaffold(
       appBar: AppBar(title: const Text('Word Hoard')),
       drawer: const SideBarView(),
       body:
-          unit.state.currentTab == 0
+          cubit.state.currentTab == 0
               ? const TranslatorView()
               : const DictionaryView(),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: unit.state.currentTab,
+        currentIndex: cubit.state.currentTab,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.language),
@@ -29,7 +29,7 @@ class HomeView extends UnitView<HomeUnit> {
             label: 'Dictionary',
           ),
         ],
-        onTap: unit.onBottomNavigationBarItemTap,
+        onTap: cubit.onBottomNavigationBarItemTap,
       ),
     );
   }

@@ -1,9 +1,9 @@
+import 'package:wordhoard/architecture/base_cubit.dart';
 import 'package:wordhoard/repositories/auth.dart';
-import 'package:wordhoard/unit/unit.dart';
 import 'package:wordhoard/wigdets/side_bar/state.dart';
 
-class SideBarUnit extends Unit<SideBarState> {
-  SideBarUnit({required this.authRepository}) : super(SideBarState());
+class SideBarCubit extends BaseCubit<SideBarState> {
+  SideBarCubit({required this.authRepository}) : super(SideBarState());
 
   final AuthRepository authRepository;
 

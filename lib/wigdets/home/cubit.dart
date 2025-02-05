@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:wordhoard/unit/unit.dart';
+import 'package:wordhoard/architecture/base_cubit.dart';
 import 'package:wordhoard/wigdets/home/state.dart';
 
-class HomeUnit extends Unit<HomeState> {
-  HomeUnit() : super(HomeState.initial);
+class HomeCubit extends BaseCubit<HomeState> {
+  HomeCubit() : super(HomeState.initial);
 
   final _currentTab = StreamController<int>.broadcast();
 
   @override
-  Stream<HomeState> get states => _currentTab.stream.map(_createState);
+  Stream<HomeState> get stream => _currentTab.stream.map(_createState);
 
   void onBottomNavigationBarItemTap(int index) {
     _currentTab.add(index);

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wordhoard/unit/unit_view.dart';
-import 'package:wordhoard/wigdets/dictionary/record/unit.dart';
+import 'package:wordhoard/architecture/base_view.dart';
+import 'package:wordhoard/wigdets/dictionary/record/cubit.dart';
 
-class DictionaryRecordView extends UnitView<DictionaryRecordUnit> {
+class DictionaryRecordView extends BaseView<DictionaryRecordCubit> {
   const DictionaryRecordView({super.key});
 
   @override
-  Widget build(BuildContext context, DictionaryRecordUnit unit) {
+  Widget buildView(BuildContext context, DictionaryRecordCubit cubit) {
     return const SizedBox.shrink();
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wordhoard/unit/unit_view.dart';
-import 'package:wordhoard/wigdets/side_bar/unit.dart';
+import 'package:wordhoard/architecture/base_view.dart';
+import 'package:wordhoard/wigdets/side_bar/cubit.dart';
 
-class SideBarView extends UnitView<SideBarUnit> {
+class SideBarView extends BaseView<SideBarCubit> {
   const SideBarView({super.key});
 
   @override
-  Widget build(BuildContext context, SideBarUnit unit) {
+  Widget buildView(BuildContext context, SideBarCubit cubit) {
     return Container(
       padding: const EdgeInsets.all(16),
       width: 200,
@@ -14,7 +14,7 @@ class SideBarView extends UnitView<SideBarUnit> {
       alignment: Alignment.topLeft,
       color: Theme.of(context).colorScheme.surface,
       child: TextButton(
-        onPressed: unit.onLogoutPressed,
+        onPressed: cubit.onLogoutPressed,
         child: const Text('Logout'),
       ),
     );
