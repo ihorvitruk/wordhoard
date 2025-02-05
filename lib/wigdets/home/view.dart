@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wordhoard/architecture/base_view.dart';
 import 'package:wordhoard/wigdets/dictionary/view.dart';
 import 'package:wordhoard/wigdets/home/cubit.dart';
-import 'package:wordhoard/wigdets/side_bar/view.dart';
 import 'package:wordhoard/wigdets/translator/view.dart';
 
 class HomeView extends BaseView<HomeCubit> {
@@ -11,8 +10,6 @@ class HomeView extends BaseView<HomeCubit> {
   @override
   Widget buildView(BuildContext context, HomeCubit cubit) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Word Hoard')),
-      drawer: const SideBarView(),
       body:
           cubit.state.currentTab == 0
               ? const TranslatorView()

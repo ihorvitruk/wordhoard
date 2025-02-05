@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wordhoard/architecture/auto_closable.dart';
 
-abstract class BaseCubit<State> extends Cubit<State> {
+abstract class BaseCubit<State> extends Cubit<State> with AutoCloseable {
   BaseCubit(super.initialState) {
-    _subscription = stream.distinct().listen(super.emit);
+    autoClose(stream.distinct().listen(super.emit));
   }
-
-  StreamSubscription? _subscription;
 
   @override
   void emit(State state) {
@@ -17,8 +16,8 @@ abstract class BaseCubit<State> extends Cubit<State> {
 
   @mustCallSuper
   @override
-  Future<void> close() {
-    _subscription?.cancel();
+  Future<void> close() async {
+    await closeAll();
     return super.close();
   }
 }

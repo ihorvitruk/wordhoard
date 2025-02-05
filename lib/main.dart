@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wordhoard/architecture/base_view.dart';
 import 'package:wordhoard/firebase_options.dart';
 import 'package:wordhoard/repositories/auth.dart';
@@ -16,33 +17,49 @@ void main() async {
   final services = Services();
   await services.init();
 
-  runApp(App(services));
+  runApp(Provider(create: (_) => services, child: const App()));
 }
 
 class App extends StatelessWidget {
-  const App(this._services, {super.key});
-
-  final Services _services;
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authRepository = AuthRepository(
-      _services.firebaseAuth,
-      _services.firebaseFirestore.collection('users'),
-    );
+    final services = context.read<Services>();
 
     return MaterialApp(
-      home: CubitBuilders(
-        init: (CubitBuilders builders) {
-          builders.add((_) => MainCubit(authRepository: authRepository));
-        },
-        child: MainView(
-          services: _services,
-          authRepository: authRepository,
-          firebaseSignInScreen: const SignInScreen(
-            showAuthActionSwitch: false,
-            showPasswordVisibilityToggle: true,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
+      ),
+      home: MultiProvider(
+        providers: [
+          Provider(
+            create:
+                (_) => AuthRepository(
+                  services.firebaseAuth,
+                  services.firebaseFirestore.collection('users'),
+                ),
           ),
+        ],
+        child: Builder(
+          builder:
+              (context) => CubitBuilders(
+                init: (CubitBuilders builders) {
+                  builders.add(
+                    (_) => MainCubit(
+                      authRepository: context.read<AuthRepository>(),
+                    ),
+                  );
+                },
+                child: MainView(
+                  authRepository: context.read<AuthRepository>(),
+                  firebaseSignInScreen: const SignInScreen(
+                    showAuthActionSwitch: false,
+                    showPasswordVisibilityToggle: true,
+                  ),
+                ),
+              ),
         ),
       ),
     );

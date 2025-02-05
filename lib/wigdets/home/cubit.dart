@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:rxdart/subjects.dart';
 import 'package:wordhoard/architecture/base_cubit.dart';
 import 'package:wordhoard/wigdets/home/state.dart';
 
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(HomeState.initial);
 
-  final _currentTab = StreamController<int>.broadcast();
+  final _currentTab = BehaviorSubject.seeded(0);
 
   @override
   Stream<HomeState> get stream => _currentTab.stream.map(_createState);

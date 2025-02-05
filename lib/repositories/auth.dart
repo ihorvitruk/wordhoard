@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:wordhoard/repositories/base.dart';
 
-class AuthRepository {
+class AuthRepository extends BaseRepository {
   AuthRepository(this._firebaseAuth, this._usersCollection);
 
   final FirebaseAuth _firebaseAuth;
@@ -12,7 +13,7 @@ class AuthRepository {
   final CollectionReference _usersCollection;
 
   Stream<bool> get isSignedIn {
-    return StreamGroup.merge([
+    return Rx.merge([
       _firebaseAuth.userChanges(),
       _firebaseAuth.idTokenChanges(),
       _firebaseAuth.authStateChanges(),

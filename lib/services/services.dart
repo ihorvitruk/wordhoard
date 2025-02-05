@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:logger/logger.dart';
 import 'package:wordhoard/firebase_options.dart';
+import 'package:wordhoard/services/api.dart';
 import 'package:wordhoard/services/time.dart';
 
 const clientId =
@@ -12,7 +14,9 @@ const clientId =
 class Services {
   late final FirebaseAuth firebaseAuth;
   late final FirebaseFirestore firebaseFirestore;
+  late final Logger logger;
   late final TimeService timeService;
+  late final ApiService apiService;
 
   Future<void> init() async {
     final firebaseApp = await _initFirebase();
@@ -20,7 +24,11 @@ class Services {
     firebaseFirestore = FirebaseFirestore.instance;
     await _configureFirebaseUiAuth();
 
+    logger = Logger();
+
     timeService = TimeService();
+
+    apiService = ApiService();
   }
 
   Future<FirebaseApp> _initFirebase() async {
