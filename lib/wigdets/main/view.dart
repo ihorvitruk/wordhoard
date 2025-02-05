@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wordhoard/architecture/base_view.dart';
@@ -65,7 +67,12 @@ class MainView extends BaseView<MainCubit> {
                     )
                     ..add((_) => SideBarCubit(authRepository: authRepository));
                 },
-                child: const HomeView(),
+                child: Align(
+                  child: SizedBox(
+                    width: min(MediaQuery.of(context).size.width, 700),
+                    child: const HomeView(),
+                  ),
+                ),
               ),
         ),
       );

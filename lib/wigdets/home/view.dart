@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:wordhoard/architecture/base_view.dart';
 import 'package:wordhoard/wigdets/dictionary/view.dart';
@@ -14,6 +16,7 @@ class HomeView extends BaseView<HomeCubit> {
           cubit.state.currentTab == 0
               ? const TranslatorView()
               : const DictionaryView(),
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: cubit.state.currentTab,
         items: const [

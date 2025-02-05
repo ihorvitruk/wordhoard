@@ -8,7 +8,7 @@ class TranslatorView extends BaseView<TranslatorCubit> {
   @override
   Widget buildView(BuildContext context, TranslatorCubit cubit) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Word Hoard')),
+      appBar: AppBar(centerTitle: false,title: const Text('Word Hoard')),
       drawer: const SideBarView(),
       body: Padding(
         padding: const EdgeInsets.all(16),

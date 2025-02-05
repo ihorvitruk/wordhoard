@@ -1,1 +1,22 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"wordhoard-d2378","configurations":{"web":"1:504232284948:web:aac521fd30338de3996801"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "wordhoard-d2378",
+          "configurations": {
+            "web": "1:504232284948:web:aac521fd30338de3996801"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -11,6 +11,7 @@ class DictionaryView extends BaseView<DictionaryCubit> {
   Widget buildView(BuildContext context, DictionaryCubit cubit) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: const Text('Word Hoard'),
         actions: [
           IconButton(

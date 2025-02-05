@@ -30,7 +30,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green[900]!),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green[900]!,
+          surface: Colors.white,
+        ),
       ),
       home: MultiProvider(
         providers: [
@@ -42,24 +45,27 @@ class App extends StatelessWidget {
                 ),
           ),
         ],
-        child: Builder(
-          builder:
-              (context) => CubitBuilders(
-                init: (CubitBuilders builders) {
-                  builders.add(
-                    (_) => MainCubit(
-                      authRepository: context.read<AuthRepository>(),
+        child: ColoredBox(
+          color: Colors.grey[900]!,
+          child: Builder(
+            builder:
+                (context) => CubitBuilders(
+                  init: (CubitBuilders builders) {
+                    builders.add(
+                      (_) => MainCubit(
+                        authRepository: context.read<AuthRepository>(),
+                      ),
+                    );
+                  },
+                  child: MainView(
+                    authRepository: context.read<AuthRepository>(),
+                    firebaseSignInScreen: const SignInScreen(
+                      showAuthActionSwitch: false,
+                      showPasswordVisibilityToggle: true,
                     ),
-                  );
-                },
-                child: MainView(
-                  authRepository: context.read<AuthRepository>(),
-                  firebaseSignInScreen: const SignInScreen(
-                    showAuthActionSwitch: false,
-                    showPasswordVisibilityToggle: true,
                   ),
                 ),
-              ),
+          ),
         ),
       ),
     );
