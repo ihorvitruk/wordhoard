@@ -1,0 +1,17 @@
+1. Cubit as state mamagement pattern
+1.1 Emit is not allowed. Need to use stream instead (see lib/architecture/base_cubit.dart)
+1.2 Each widget has own cubit (lib/architecture/base_view.dart)
+2. Views can be created directly in widget tree. Because logic is incapsulated in base_view already
+2.1. Params can be passed to views (convinient way, comparing to simple provider which not allow to do it). See lib/architecture/builders.dart
+3. Rpository as a central part of the app
+3.1 Repositories work with streams. Repositories are streamable.
+3.2. (Optional) not sure one more layer (like UseCase) is needed between REpository and CUbit. It depends on complexity and repeatness of business logic
+3.3. Services provide data to repositories
+4. RxDart is used to work with streams
+
+So, 1-tier priority libs to add are:
+
+flutter_bloc
+freezed
+provider
+rxdart
