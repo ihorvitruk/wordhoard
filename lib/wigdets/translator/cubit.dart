@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:wordhoard/architecture/base_cubit.dart';
 import 'package:wordhoard/repositories/translations.dart';
@@ -18,6 +19,8 @@ class TranslatorCubit extends BaseCubit<TranslatorState> {
   final _isTranslating = BehaviorSubject.seeded(false);
 
   final _translation = BehaviorSubject.seeded('');
+
+  final tts = FlutterTts();
 
   @override
   Stream<TranslatorState> get stream =>
@@ -39,20 +42,23 @@ class TranslatorCubit extends BaseCubit<TranslatorState> {
   }
 
   Future<void> onTranslatePressed() async {
-    final input = inputTextController.text.trim();
-    if (input.isEmpty) return;
+    if (_input.isEmpty) return;
 
     _isTranslating.add(true);
-    final translation = await _apiService.translate(
-      inputTextController.text.trim(),
-    );
+    final translation = await _apiService.translate(_input);
     _translation.add(translation);
     _isTranslating.add(false);
 
-    await _translationsRepository.addTranslation(input, translation);
+    await _translationsRepository.addTranslation(_input, translation);
   }
+
+  String get _input => inputTextController.text.trim();
 
   void onInputTextChanged(String text) {
     _translation.add('');
+  }
+
+  Future<void> onListenPressed() async {
+    await tts.speak(_input);
   }
 }

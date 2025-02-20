@@ -8,7 +8,7 @@ class TranslatorView extends BaseView<TranslatorCubit> {
   @override
   Widget buildView(BuildContext context, TranslatorCubit cubit) {
     return Scaffold(
-      appBar: AppBar(centerTitle: false,title: const Text('Word Hoard')),
+      appBar: AppBar(centerTitle: false, title: const Text('Word Hoard')),
       drawer: const SideBarView(),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -29,13 +29,22 @@ class TranslatorView extends BaseView<TranslatorCubit> {
               child:
                   cubit.state.isTranslating
                       ? const CircularProgressIndicator()
-                      : ElevatedButton(
-                        onPressed: cubit.onTranslatePressed,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green[900],
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text('Translate'),
+                      : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.volume_up),
+                            onPressed: cubit.onListenPressed,
+                          ),
+                          ElevatedButton(
+                            onPressed: cubit.onTranslatePressed,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green[900],
+                              foregroundColor: Colors.white,
+                            ),
+                            child: const Text('Translate'),
+                          ),
+                        ],
                       ),
             ),
             const SizedBox(height: 16),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:wordhoard/architecture/base_view.dart';
 import 'package:wordhoard/wigdets/dictionary/view.dart';
